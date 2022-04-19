@@ -4,6 +4,11 @@ runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
+      with:
+        repository: actblue/kdiff
+        ref: main
+        path: .github/actions
     - run: sudo apt-get install colordiff ruby zsh
       shell: bash
     - name: fetch pull request target branch
@@ -14,5 +19,5 @@ runs:
     - name: print kustomize version
       run: kustomize version
       shell: bash
-    - run: ruby script/kdiff.rb $GITHUB_BASE_REF
+    - run: ruby .github/actions/kdiff/kdiff.rb $GITHUB_BASE_REF
       shell: bash
