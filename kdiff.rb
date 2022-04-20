@@ -4,7 +4,7 @@ require 'optparse'
 require 'tmpdir'
 
 def kdiff(old, new)
-  %x( zsh -c 'colordiff -u <(kustomize build #{old}) <(kustomize build #{new})' )
+  %x( zsh -c 'colordiff -u <(kustomize build --load-restrictor=LoadRestrictionsNone #{old}) <(kustomize build --load-restrictor=LoadRestrictionsNone #{new})' )
 end
 
 def kdiffs(old, new)
