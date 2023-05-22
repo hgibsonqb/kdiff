@@ -8,9 +8,9 @@ def kdiff(old, new)
 end
 
 def kdiffs(old, new)
-  clusters = Dir.children("#{old}/cluster") | Dir.children("#{new}/cluster")
-  clusters.collect do |cluster|
-    [cluster, kdiff("#{old}/cluster/#{cluster}", "#{new}/cluster/#{cluster}")]
+  subdirs = Dir.glob("#{old}/**/") | Dir.glob("#{new}/**/")
+  subdirs.collect do |subdir|
+    [cluster, kdiff("#{old}/#{subdir}", "#{new}/#{subdir}")]
   end.to_h.delete_if { |k, v| v.empty? }
 end
 
